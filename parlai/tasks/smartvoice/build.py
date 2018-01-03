@@ -1,0 +1,22 @@
+import parlai.core.build_data as build_data
+import os
+
+
+def build(opt):
+    dpath = os.path.join(opt['datapath'], 'ChitChat')
+    version = None
+
+    # Check if data had been previously built
+    if not build_data.built(dpath, version_string=version):
+        print('[building data: ' + dpath + ']')
+        if build_data.built(dpath):
+            # An older version exists, so remove these outdated files.
+            build_data.remove_dir(dpath)
+        build_data.make_dir(dpath)
+
+        # Import the data.
+        fname = 'chitchat_corpus'
+        build_data.untar(dpath, fname)
+
+        # Mark the data as built.
+        build_data.mark_done(dpath, version_string=version)
