@@ -53,7 +53,7 @@ Train a simple sequence to sequence model on the "1k training examples" bAbI tas
 python train_model.py -m seq2seq -t babi:task1k:1 -bs 8 -e 1 -mf /tmp/model_s2s
 ```
 
-Trains an attentive LSTM model of [Chen et al.](https://arxiv.org/abs/1704.00051) on the SQuAD dataset with a batch size of 32 examples (requires pytorch):
+Trains an attentive LSTM modelof [Chen et al.](https://arxiv.org/abs/1704.00051) on the SQuAD dataset with a batch size of 32 examples (requires pytorch):
 ```bash
 python train_model.py -m drqa -t squad -bs 32 -mf /tmp/model_drqa
 ```

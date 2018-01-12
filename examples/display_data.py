@@ -17,6 +17,7 @@ from parlai.core.worlds import create_task
 
 import random
 
+
 def display_data(opt):
     # create repeat label agent and assign it to the specified task
     agent = RepeatLabelAgent(opt)

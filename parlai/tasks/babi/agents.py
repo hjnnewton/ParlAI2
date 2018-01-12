@@ -45,7 +45,8 @@ class Task1kTeacher(FbDialogTeacher):
         task = opt.get('task', 'babi:Task1k:1')
         self.task_num = task.split(':')[2]
         opt['datafile'] = _path('', self.task_num, opt)
-        opt['cands_datafile'] = _path('', task.split(':')[2], opt, 'train')
+        print("===================================================")
+        print(opt['datafile'])
         super().__init__(opt, shared)
 
     def setup_data(self, path):

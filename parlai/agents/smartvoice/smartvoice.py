@@ -20,7 +20,7 @@ import os
 import random
 
 
-class SmartVoiceAgent(Agent):
+class Seq2seqAgent(Agent):
     """Agent which takes an input sequence and produces an output sequence.
 
     This model supports encoding the input and decoding the output via one of
@@ -28,6 +28,9 @@ class SmartVoiceAgent(Agent):
     be shared with the embedding layer) to convert RNN output states into
     output tokens. This model currently uses greedy decoding, selecting the
     highest probability token at each time step.
+
+    For more information, see Sequence to Sequence Learning with Neural
+    Networks `(Sutskever et al. 2014) <https://arxiv.org/abs/1409.3215>`_.
     """
 
     OPTIM_OPTS = {
@@ -49,7 +52,7 @@ class SmartVoiceAgent(Agent):
     @staticmethod
     def add_cmdline_args(argparser):
         """Add command-line arguments specifically for this agent."""
-        SmartVoiceAgent.dictionary_class().add_cmdline_args(argparser)
+        Seq2seqAgent.dictionary_class().add_cmdline_args(argparser)
         agent = argparser.add_argument_group('Seq2Seq Arguments')
         agent.add_argument('-hs', '--hiddensize', type=int, default=128,
                            help='size of the hidden layers')
@@ -109,7 +112,7 @@ class SmartVoiceAgent(Agent):
                                 'weights. '
                                 'All shares all three weights.')
         agent.add_argument('-opt', '--optimizer', default='adam',
-                           choices=SmartVoiceAgent.OPTIM_OPTS.keys(),
+                           choices=Seq2seqAgent.OPTIM_OPTS.keys(),
                            help='Choose between pytorch optimizers. '
                                 'Any member of torch.optim is valid and will '
                                 'be used with default params except learning '
@@ -325,6 +328,7 @@ class SmartVoiceAgent(Agent):
         else:
             obs['text2vec'] = deque(obs['text2vec'], self.opt['history_length'])
         self.observation = obs
+        print(obs)
         self.answers[batch_idx] = None
         return obs
 

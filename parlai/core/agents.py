@@ -275,6 +275,7 @@ def name_to_agent_class(name):
 
 def load_agent_module(opt):
     optfile =  opt['model_file'] + '.opt'
+    print("optfile = " + optfile)
     if os.path.isfile(optfile):
         with open(optfile, 'rb') as handle:
            opt = pickle.load(handle)
@@ -311,10 +312,12 @@ def create_agent(opt):
     the options file if it exists (the file opt['model_file'] + '.opt' must exist and
     contain a pickled dict containing the model's options).
     """
+    print(1)
     if opt.get('model_file'):
         # Attempt to load the model from the model file first (this way we do not even
         # have to specify the model name as a parameter.
         model = load_agent_module(opt)
+        print(opt.get('model_file'))
         if model is not None:
             return model
         else:
